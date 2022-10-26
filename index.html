@@ -19,7 +19,6 @@
         <p>Location: {{product.location}}</p>
         <p>Price: {{product.price}}</p>
         <p>Space: {{product.space}}</p>
-
         <button v-on:click="clickFunction" v-if="canAddToCart">
           Add to the Cart
         </button>
@@ -50,6 +49,7 @@
               this.cart.push(this.product.id);
             }
           },
+
           changeSpaceValue: function () {
             if (this.product.space > 0) {
               this.product.space -= 1;
