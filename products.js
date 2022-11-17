@@ -14,7 +14,7 @@ let products = [
     subject: "Math",
     location: "Oxford",
     price: "100",
-    path: "math.png",
+    path: "/Users/bao/Desktop/mdx/CST3145-learn-git/pictures/math.png",
     space: 5,
   },
   {
@@ -23,7 +23,7 @@ let products = [
     subject: "Chinese",
     location: "London",
     price: "100",
-    path: "chinese.png",
+    path: "/Users/bao/Desktop/mdx/CST3145-learn-git/pictures/chinese.png",
     space: 5,
   },
   {
