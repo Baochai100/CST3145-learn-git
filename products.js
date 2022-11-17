@@ -5,7 +5,7 @@ let products = [
     subject: "Math",
     location: "London",
     price: 100,
-    path: "math.png",
+    path: "/Users/bao/Desktop/mdx/CST3145-learn-git/pictures/math.png",
     space: 5,
   },
   {
