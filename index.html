@@ -20,8 +20,9 @@
     <div id="course">
       <h1 v-text="siteName"></h1>
       <input type="text" v-model="search" placeholder="Search Lessons" id="searchBox"/>
+      <h3>Sort By</h3>
       <div id="sort">
-        <p>Sort By</p>
+      
         <p>
           <input type="radio" id="subject" value="Subject" v-model="sort.method" />
         <label for="subject">Subject</label>
@@ -42,6 +43,8 @@
         <label for="availability">Availability</label>
         </p>
 
+      </div>
+      <div id="sort">
         <p>
           <input type="radio" id="ascending" value="Ascending" v-model="sort.order" />
         <label for="ascending">Ascending</label>
@@ -51,10 +54,8 @@
           <input type="radio" id="dscending" value="Descending" v-model="sort.order" />
         <label for="dscending">Descending</label>
         </p>
-
-
       </div>
-      <div v-if=" totalItemInTheCart>0">
+      <div v-if=" totalItemInTheCart>0" >
       <button v-on:click="toggleShowProduct">
         {{totalItemInTheCart}}
         <span class="fas fa-cat"></span>
@@ -69,7 +70,7 @@
       </div>
 
 
-      <div v-if="showProduct">
+      <div v-if="showProduct" id="lessons">
         <div v-for="product in sortedProducts && filteredLesson " class="container">
           <img v-bind:src="product.path" />
           <p>Subject: {{product.subject}}</p>

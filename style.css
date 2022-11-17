@@ -16,6 +16,15 @@ img {
   border: 1px solid;
   height: 40px;
 }
+#sort {
+  display: inline-flex;
+}
+
+#lessons {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 
 /* button {
   position: absolute;
@@ -27,4 +36,4 @@ img {
   border-radius: 3px;
   border: 1px solid black;
   cursor: pointer;
-} */
+} */ ;
