@@ -55,14 +55,14 @@
         <label for="dscending">Descending</label>
         </p>
       </div>
-      <div v-if=" totalItemInTheCart>0" >
+      <div class="cart" v-if=" totalItemInTheCart>0" >
       <button v-on:click="toggleShowProduct">
         {{totalItemInTheCart}}
         <span class="fas fa-cat"></span>
         Shopping Cart
       </button>
       </div>
-      <div v-else>
+      <div class="cart" v-else>
         <button disabled>
           {{totalItemInTheCart}}
           <span class="fas fa-cat"></span>
@@ -72,6 +72,7 @@
 
       <div v-if="showProduct" id="lessons">
         <div v-for="product in sortedProducts && filteredLesson " class="container">
+          
           <img v-bind:src="product.path" />
           <p>Subject: {{product.subject}}</p>
           <p>Location: {{product.location}}</p>
@@ -85,12 +86,14 @@
           </button>
 
           <button v-else disabled>Add to the Cart</button>
-        </div>
+        
+      </div>
       </div>
 
       <div v-else>
         
-        <h1>welcome to checkout page</h1>
+        <h2>welcome to checkout page</h2>
+        <div class="checkoutContainer"> 
         <div v-for="item in cart" class="container">
           <img v-bind:src="item.path" />
           <p>Subject: {{item.id}}</p>
@@ -98,9 +101,10 @@
           <p>Price: {{item.price}}</p>
           <p>Space: {{item.space}}</p>
           <button v-on:click="deleteItemFromCart(item),addSpaceValue(item)">Remove</button>
-        
+        </div>
         </div> 
         
+        <div class="information">
         <h2>Enter Your Information</h2>
 
         <form id="form" action="/" method="GET" onkeyup="checkInput()">
@@ -114,7 +118,7 @@
           </div>
           <button id="checkOut" type="button" disabled v-on:click="submitForm">Check Out</button>
         </form>
-      
+      </div>
       </div>
     </div>
 
