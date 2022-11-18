@@ -111,16 +111,3 @@ function checkInput() {
     document.getElementById("checkOut").disabled = false;
   }
 }
-// const submitBtn = document.querySelector('input[type="submit"]');
-// submitBtn.addEventListener("click", allLetters);
-
-// function allLetters(e) {
-//   e.preventDefault();
-//   let letters = /^[A-Za-z]+$/;
-
-//   if (inputName.value.match(letters)) {
-//     alert("input is valid");
-//   } else {
-//     alert("input not valid");
-//   }
-// }
