@@ -301,7 +301,7 @@
               "phone":course.order.phoneNumber,
               "lessonId":course.cart.map(item=>item._id),
               // "lessonId":this.cartId[i],
-              "space":1
+              "space":course.cart.map(item=>5-item.space)
 
             }
             fetch("https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/orders", {
