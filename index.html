@@ -144,10 +144,10 @@
         <form id="form" action="/" method="GET" onkeyup="checkInput()">
           <div>
             <label for="name">Name</label>
-            <input v-model.trim="order.name" id="name" name="name" type="text" required  onkeyup="lettersOnly(this)"/ >
+            <input v-model.trim="order.name" id="nameLetter" name="name" type="text" required  onkeyup="lettersOnly(this)"/ >
             
             <script> 
-            const inputBox = document.querySelector("#name");
+            const inputBox = document.querySelector("#nameLetter");
             inputBox.addEventListener("input", function() {
               this.value = this.value.replace(/[^a-zA-Z]/g, "");
             });
