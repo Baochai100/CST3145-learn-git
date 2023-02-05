@@ -145,6 +145,14 @@
           <div>
             <label for="name">Name</label>
             <input v-model.trim="order.name" id="name" name="name" type="text" required  onkeyup="lettersOnly(this)"/ >
+            
+            <script> 
+            const inputBox = document.querySelector("#name");
+            inputBox.addEventListener("input", function() {
+              this.value = this.value.replace(/[^a-zA-Z]/g, "");
+            });
+            </script>
+
           </div>
           <div>
             <label for="phone">Phone</label>
