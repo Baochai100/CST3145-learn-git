@@ -13,7 +13,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
-    <!-- <script src="products.js"></script> -->
+    <link rel="icon" type="image/x-icon" hre="icon-512.png">
+    <link rel="manifest" href="afterschool.webmanifest">
+    <script src="products.js"></script>
   </head>
 
 
@@ -146,12 +148,12 @@
             <label for="name">Name</label>
             <input v-model.trim="order.name" id="nameLetter" name="name" type="text" required  onkeyup="lettersOnly(this)"/ >
             
-            <script> 
+            <!-- <script> 
             const inputBox = document.querySelector("#nameLetter");
             inputBox.addEventListener("input", function() {
               this.value = this.value.replace(/[^a-zA-Z]/g, "");
             });
-            </script>
+            </script> -->
 
           </div>
           <div>
@@ -185,11 +187,12 @@
           //   space: 5,
           // },
           orders:[],
-          products: [],//products,
+          //products:products,
+           products: [],//products,
           // search:"",
           searchResults: [],
           cart: [],
-          cout:0,
+          count:0,
           cartId:[],
           sort:{
             method:"Subject",
@@ -205,6 +208,12 @@
 
         
         created: function() {
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js");
+          }
+
+
+
           fetch("https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products").then(   
           function(response){
             response.json().then(
@@ -317,7 +326,7 @@
               headers: {
                 "Content-Type": "application/json", //set the data type as JSON
               },
-              body: JSON.stringify(newOrder) //need to stringigy the JSON
+              body: JSON.stringify(newOrder) //need  the JSON
               }).then(
               function(response) {
                 response.json().then(
@@ -385,7 +394,7 @@
               headers: {
                 "Content-Type": "application/json", //set the data type as JSON
               },
-              body: JSON.stringify(newProduct) //need to stringigy the JSON
+              body: JSON.stringify(newProduct) //need  the JSON
               }).then(
               function(response) {
                 response.json().then(
