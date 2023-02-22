@@ -97,11 +97,11 @@
           Shopping Cart
         </button>
       </div>
-      <button @click="saveProductToDB">
+      <!-- <button @click="saveProductToDB">
         <span class="fas fa-cat"></span>
         Test Save a Product to the DB
-      </button>
-    </div>
+      </button> -->
+    
     <div class="cart" v-else>
       <button disabled>
         {{totalItemInTheCart}}
@@ -113,25 +113,26 @@
         Test Console
       </button>
     </div>
-    <div v-if="testConsole && showTestConsole">
-      <button @click="saveProductToDB">
-        <span class=":fas fa-save"></span>
-        Test Save a Product to the DB
-      </button>
-      <button @click="deleteAllCashes">
-        <span class="fas fa-trash"></span>
-        Delete All Caches
-      </button>
-      <button @click="reloadPage">
-        <span class="fas fa-sync"></span>
-        Reload Page
-      </button>
-      <strong>HTTPS Test:</strong>
-      <a v-bind:href="serverURL1" target="_blank">link</a>
-      <button @click="unregisterAllServiceWorkers">
-        <span class="fab fa-uniregistry"></span>
-        Unregister All ServiceWorkers
-      </button>
+
+      <div v-if="testConsole && showTestConsole">
+        <button @click="saveProductToDB">
+          <span class=":fas fa-save"></span>
+          Test Save a Product to the DB
+        </button>
+        <button @click="deleteAllCashes">
+          <span class="fas fa-trash"></span>
+          Delete All Caches
+        </button>
+        <button @click="reloadPage">
+         <span class="fas fa-sync"></span>
+          Reload Page
+        </button>
+        <strong>HTTPS Test:</strong>
+        <a v-bind:href="serverURL1" target="_blank">link</a>
+        <button @click="unregisterAllServiceWorkers">
+         <span class="fab fa-uniregistry"></span>
+          Unregister All ServiceWorkers
+        </button>
 
       <div class="container">
         <ul v-if="SearchItemsView">
@@ -465,7 +466,9 @@
 
           deleteAllCashes() {
             caches.keys().then(function (names) {
-              for (let name of names) caches.delete(name);
+              for (let name of names){
+                caches.delete(name);
+              } 
             });
             console.log("All Caches Deleted");
           },
