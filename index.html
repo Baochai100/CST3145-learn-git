@@ -101,18 +101,18 @@
         <span class="fas fa-cat"></span>
         Test Save a Product to the DB
       </button> -->
-    
-    <div class="cart" v-else>
-      <button disabled>
-        {{totalItemInTheCart}}
-        <span class="fas fa-cat"></span>
-        Shopping Cart
-      </button>
-      <button v-if="testConsole" @click="toggleShowTestConsole">
-        <span class="fas fa-text-height"></span>
-        Test Console
-      </button>
-    </div>
+
+      <div class="cart" v-else>
+        <button disabled>
+          {{totalItemInTheCart}}
+          <span class="fas fa-cat"></span>
+          Shopping Cart
+        </button>
+        <button v-if="testConsole" @click="toggleShowTestConsole">
+          <span class="fas fa-text-height"></span>
+          Test Console
+        </button>
+      </div>
 
       <div v-if="testConsole && showTestConsole">
         <button @click="saveProductToDB">
@@ -124,69 +124,66 @@
           Delete All Caches
         </button>
         <button @click="reloadPage">
-         <span class="fas fa-sync"></span>
+          <span class="fas fa-sync"></span>
           Reload Page
         </button>
         <strong>HTTPS Test:</strong>
         <a v-bind:href="serverURL1" target="_blank">link</a>
         <button @click="unregisterAllServiceWorkers">
-         <span class="fab fa-uniregistry"></span>
+          <span class="fab fa-uniregistry"></span>
           Unregister All ServiceWorkers
         </button>
       </div>
     </div>
-    
-      
 
-      <div class="container">
-        <ul v-if="SearchItemsView">
-          <h3>Search Results</h3>
-          <li v-for="lesson in FilterLessons">
-            <img v-bind:src="serverURL + lesson.path" /><br />
-            <p>Subject: {{lesson.subject}}</p>
-            <p>Location: {{lesson.location}}</p>
-            <p>Price: {{lesson.price}}</p>
-            <p>Space: {{lesson.space}}</p>
-          </li>
-        </ul>
+    <div class="container">
+      <ul v-if="SearchItemsView">
+        <h3>Search Results</h3>
+        <li v-for="lesson in FilterLessons">
+          <img v-bind:src="serverURL + lesson.path" /><br />
+          <p>Subject: {{lesson.subject}}</p>
+          <p>Location: {{lesson.location}}</p>
+          <p>Price: {{lesson.price}}</p>
+          <p>Space: {{lesson.space}}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div v-if="showProduct" id="lessons">
+      <div v-for="product in sortedProducts" class="container">
+        <img v-bind:src="serverURL + product.path" />
+        <p>Subject: {{product.subject}}</p>
+        <p>Location: {{product.location}}</p>
+        <p>Price: {{product.price}}</p>
+        <p>Space: {{product.space}}</p>
+        <button
+          v-on:click="clickFunction(product)"
+          v-if="canAddToCart(product)"
+        >
+          <span class="fas fa-cart-plus"></span> Add to the Cart
+        </button>
+
+        <button v-else disabled>Add to the Cart</button>
       </div>
+    </div>
 
-      <div v-if="showProduct" id="lessons">
-        <div v-for="product in sortedProducts" class="container">
-          <img v-bind:src="serverURL + product.path" />
-          <p>Subject: {{product.subject}}</p>
-          <p>Location: {{product.location}}</p>
-          <p>Price: {{product.price}}</p>
-          <p>Space: {{product.space}}</p>
-          <button
-            v-on:click="clickFunction(product)"
-            v-if="canAddToCart(product)"
-          >
-            <span class="fas fa-cart-plus"></span> Add to the Cart
+    <div v-else>
+      <h2>welcome to checkout page</h2>
+      <div class="checkoutContainer">
+        <div
+          v-for="item in sortedProducts"
+          v-if="cartId.includes(item.id)"
+          class="container"
+        >
+          <img v-bind:src="serverURL + item.path" />
+          <p>Subject: {{item.subject}}</p>
+          <p>Location: {{item.location}}</p>
+          <p>Price: {{item.price}}</p>
+          <p>Space: {{CartedItemSpacesCount(item.id)}}</p>
+          <!-- <button v-on:click="deleteItemFromCart(item),addSpaceValue(item)">Remove</button> -->
+          <button v-on:click="RemoveCartItem(item),deleteItemFromCart(item)">
+            Remove
           </button>
-
-          <button v-else disabled>Add to the Cart</button>
-        </div>
-      </div>
-
-      <div v-else>
-        <h2>welcome to checkout page</h2>
-        <div class="checkoutContainer">
-          <div
-            v-for="item in sortedProducts"
-            v-if="cartId.includes(item.id)"
-            class="container"
-          >
-            <img v-bind:src="serverURL + item.path" />
-            <p>Subject: {{item.subject}}</p>
-            <p>Location: {{item.location}}</p>
-            <p>Price: {{item.price}}</p>
-            <p>Space: {{CartedItemSpacesCount(item.id)}}</p>
-            <!-- <button v-on:click="deleteItemFromCart(item),addSpaceValue(item)">Remove</button> -->
-            <button v-on:click="RemoveCartItem(item),deleteItemFromCart(item)">
-              Remove
-            </button>
-          </div>
         </div>
 
         <div class="information">
@@ -470,9 +467,9 @@
 
           deleteAllCashes() {
             caches.keys().then(function (names) {
-              for (let name of names){
+              for (let name of names) {
                 caches.delete(name);
-              } 
+              }
             });
             console.log("All Caches Deleted");
           },
