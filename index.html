@@ -108,31 +108,30 @@
         <span class="fas fa-cat"></span>
         Shopping Cart
       </button>
-    </div>
-
-    <button v-if="testConsole" @click="toggleShowTestConsole">
-      <span class="fas fa-text-height"></span>
-      Test Console
-    </button>
-    <div v-if="testConsole && showTestConsole">
-      <button @click="saveProductToDB">
-        <span class=":fas fa-save"></span>
-        Test Save a Product to the DB
+      <button v-if="testConsole" @click="toggleShowTestConsole">
+        <span class="fas fa-text-height"></span>
+        Test Console
       </button>
-      <button @click="deleteAllCashes">
-        <span class="fas fa-trash"></span>
-        Delete All Caches
-      </button>
-      <button @click="reloadPage">
-        <span class="fas fa-sync"></span>
-        Reload Page
-      </button>
-      <strong>HTTPS Test:</strong>
-      <a v-bind:href="serverURL1" target="_blank">link</a>
-      <button @click="unregisterAllServiceWorkers">
-        <span class="fab fa-uniregistry"></span>
-        Unregister All ServiceWorkers
-      </button>
+      <div v-if="testConsole && showTestConsole">
+        <button @click="saveProductToDB">
+          <span class=":fas fa-save"></span>
+          Test Save a Product to the DB
+        </button>
+        <button @click="deleteAllCashes">
+          <span class="fas fa-trash"></span>
+          Delete All Caches
+        </button>
+        <button @click="reloadPage">
+          <span class="fas fa-sync"></span>
+          Reload Page
+        </button>
+        <strong>HTTPS Test:</strong>
+        <a v-bind:href="serverURL1" target="_blank">link</a>
+        <button @click="unregisterAllServiceWorkers">
+          <span class="fab fa-uniregistry"></span>
+          Unregister All ServiceWorkers
+        </button>
+      </div>
 
       <div class="container">
         <ul v-if="SearchItemsView">
