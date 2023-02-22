@@ -74,6 +74,31 @@
         <span class="fas fa-cat"></span>
         Shopping Cart
       </button>
+      <button v-if="testConsole" @click="toggleShowTestConsole">
+        <span class="fas fa-text-height"></span>
+        Test Console
+      </button>
+      <div v-if="testConsole && showTestConsole" class="test-console">
+        <button @click="saveProductToDB" class="test-elem">
+          <span class=":fas fa-save"></span>
+          Test Save a Product to the DB
+        </button>
+        <button @click="deleteAllCashes" class="test-elem">
+          <span class="fas fa-trash"></span>
+          Delete All Caches
+        </button>
+        <button @click="reloadPage" class="test-elem">
+          <span class="fas fa-sync"></span>
+          Reload Page
+        </button>
+        <strong class="test-elem">HTTPS Test:</strong>
+        <a v-bind:href="serverURL1" target="_blank">link</a>
+        <button @click="unregisterAllServiceWorkers" class="test-elem">
+          <span class="fab fa-uniregistry"></span>
+          Unregister All ServiceWorkers
+        </button>
+
+      </div>
       <button @click="saveProductToDB">
         <span class="fas fa-cat"></span>
         Test Save a Product to the DB
@@ -178,7 +203,7 @@
           showProduct: true,
           SearchResultLesson:null,
           //serverURL1:"http://localhost:3000/collections/products",
-          //serverURL1:"https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products",
+          serverURL1:"https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products",
           // product: {
           //   id: 000,
           //   siteName: "After School Club",
@@ -205,6 +230,8 @@
             phoneNumber:" ",
           },
           SearchItemsView:false,
+          testConsole:true,
+          showTestConsole:false,
         },
         
 
@@ -281,6 +308,10 @@
           toggleShowProduct() {
             this.showProduct = this.showProduct ? false : true;
           },
+          //toggleShowTestConsole
+          toggleShowTestConsole(){
+            this.showTestConsole=!this.showTestConsole;
+          },
           CartedItemSpacesCount(id) {
             let count = 0;
             for (let i = 0; i < this.cartId.length; i++) {
@@ -341,7 +372,6 @@
               ); 
              
              
-
               const convertIntToHexString = (num) => {
                 let hexString = num.toString(16);
                 while (hexString.length < 24) {
@@ -407,7 +437,27 @@
                   }
                 )}
               ); 
+          },
+
+          deleteAllCashes(){
+            caches.keys().then(function(names) {
+              for (let name of names)
+                caches.delete(name);
+            });
+            console.log("All Caches Deleted");
+          },
+          reloadPage() {
+            window.location.reload();
+          },
+          unregisterAllServiceWorkers() {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+              for (let registration of registrations) {
+                registration.unregister()
+              }
+            });
+            console.log("ServiceWorkers Unregistered");
           }
+
           
         },
           
