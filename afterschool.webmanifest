@@ -1,7 +1,7 @@
 {
-  "name": "My Pet Store PWA",
-  "short_name": "Petstore",
-  "description": "My online pet store",
+  "name": "After School Club",
+  "short_name": "after school",
+  "description": "My online school store",
   "icons": [
     {
       "src": "icon-192.png",
