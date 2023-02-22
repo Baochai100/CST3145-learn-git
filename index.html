@@ -14,7 +14,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
     <link rel="icon" type="image/x-icon" hre="icon-512.png" />
-    <link rel="manifest" href="afterschool.webmanifest" /-->
+    <link rel="manifest" href="afterschool.webmanifest" />
     <script src="products.js"></script>
   </head>
 
@@ -134,90 +134,90 @@
           Unregister All ServiceWorkers
         </button>
       </div>
-   
-   
-    <div class="container">
-      <ul v-if="SearchItemsView">
-        <h3>Search Results</h3>
-        <li v-for="lesson in FilterLessons">
-          <img v-bind:src="serverURL + lesson.path" /><br />
-          <p>Subject: {{lesson.subject}}</p>
-          <p>Location: {{lesson.location}}</p>
-          <p>Price: {{lesson.price}}</p>
-          <p>Space: {{lesson.space}}</p>
-        </li>
-      </ul>
-    </div>
 
-    <div v-if="showProduct" id="lessons">
-      <div v-for="product in sortedProducts" class="container">
-        <img v-bind:src="serverURL + product.path" />
-        <p>Subject: {{product.subject}}</p>
-        <p>Location: {{product.location}}</p>
-        <p>Price: {{product.price}}</p>
-        <p>Space: {{product.space}}</p>
-        <button
-          v-on:click="clickFunction(product)"
-          v-if="canAddToCart(product)"
-        >
-          <span class="fas fa-cart-plus"></span> Add to the Cart
-        </button>
-
-        <button v-else disabled>Add to the Cart</button>
+      <div class="container">
+        <ul v-if="SearchItemsView">
+          <h3>Search Results</h3>
+          <li v-for="lesson in FilterLessons">
+            <img v-bind:src="serverURL + lesson.path" /><br />
+            <p>Subject: {{lesson.subject}}</p>
+            <p>Location: {{lesson.location}}</p>
+            <p>Price: {{lesson.price}}</p>
+            <p>Space: {{lesson.space}}</p>
+          </li>
+        </ul>
       </div>
-    </div>
 
-    <div v-else>
-      <h2>welcome to checkout page</h2>
-      <div class="checkoutContainer">
-        <div
-          v-for="item in sortedProducts"
-          v-if="cartId.includes(item.id)"
-          class="container"
-        >
-          <img v-bind:src="serverURL + item.path" />
-          <p>Subject: {{item.subject}}</p>
-          <p>Location: {{item.location}}</p>
-          <p>Price: {{item.price}}</p>
-          <p>Space: {{CartedItemSpacesCount(item.id)}}</p>
-          <!-- <button v-on:click="deleteItemFromCart(item),addSpaceValue(item)">Remove</button> -->
-          <button v-on:click="RemoveCartItem(item),deleteItemFromCart(item)">
-            Remove
+      <div v-if="showProduct" id="lessons">
+        <div v-for="product in sortedProducts" class="container">
+          <img v-bind:src="serverURL + product.path" />
+          <p>Subject: {{product.subject}}</p>
+          <p>Location: {{product.location}}</p>
+          <p>Price: {{product.price}}</p>
+          <p>Space: {{product.space}}</p>
+          <button
+            v-on:click="clickFunction(product)"
+            v-if="canAddToCart(product)"
+          >
+            <span class="fas fa-cart-plus"></span> Add to the Cart
           </button>
+
+          <button v-else disabled>Add to the Cart</button>
         </div>
+      </div>
 
-        <div class="information">
-          <h2>Enter Your Information</h2>
+      <div v-else>
+        <h2>welcome to checkout page</h2>
+        <div class="checkoutContainer">
+          <div
+            v-for="item in sortedProducts"
+            v-if="cartId.includes(item.id)"
+            class="container"
+          >
+            <img v-bind:src="serverURL + item.path" />
+            <p>Subject: {{item.subject}}</p>
+            <p>Location: {{item.location}}</p>
+            <p>Price: {{item.price}}</p>
+            <p>Space: {{CartedItemSpacesCount(item.id)}}</p>
+            <!-- <button v-on:click="deleteItemFromCart(item),addSpaceValue(item)">Remove</button> -->
+            <button v-on:click="RemoveCartItem(item),deleteItemFromCart(item)">
+              Remove
+            </button>
+          </div>
 
-          <form id="form" action="/" method="GET" onkeyup="checkInput()">
-            <div>
-              <label for="name">Name</label>
-              <input v-model.trim="order.name" id="nameLetter" name="name"
-              type="text" required onkeyup="lettersOnly(this)"/ >
+          <div class="information">
+            <h2>Enter Your Information</h2>
 
-              <!-- <script> 
+            <form id="form" action="/" method="GET" onkeyup="checkInput()">
+              <div>
+                <label for="name">Name</label>
+                <input v-model.trim="order.name" id="nameLetter" name="name"
+                type="text" required onkeyup="lettersOnly(this)"/ >
+
+                <!-- <script> 
             const inputBox = document.querySelector("#nameLetter");
             inputBox.addEventListener("input", function() {
               this.value = this.value.replace(/[^a-zA-Z]/g, "");
             });
             </script> -->
-            </div>
-            <div>
-              <label for="phone">Phone</label>
-              <input
-                v-model.number="order.phoneNumber"
-                id="phone"
-                name="phone"
-                type="number"
-                required
-                onkeyup="numbersOnly(this)"
-              />
-            </div>
-            <!-- <button id="checkOut" type="button" v-on:click="submitOrder && updateProducts">Check Out</button> -->
-            <button id="checkOut" type="button" v-on:click="submitOrder">
-              Check Out
-            </button>
-          </form>
+              </div>
+              <div>
+                <label for="phone">Phone</label>
+                <input
+                  v-model.number="order.phoneNumber"
+                  id="phone"
+                  name="phone"
+                  type="number"
+                  required
+                  onkeyup="numbersOnly(this)"
+                />
+              </div>
+              <!-- <button id="checkOut" type="button" v-on:click="submitOrder && updateProducts">Check Out</button> -->
+              <button id="checkOut" type="button" v-on:click="submitOrder">
+                Check Out
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
