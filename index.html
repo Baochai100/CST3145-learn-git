@@ -270,7 +270,7 @@
           }
 
           //lesso
-          https: fetch(this.serverURL1).then(function (response) {
+          fetch(this.serverURL1).then(function (response) {
             response.json().then(function (json) {
               course.products = json;
             });
