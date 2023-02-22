@@ -273,6 +273,7 @@
           fetch(this.serverURL1).then(function (response) {
             response.json().then(function (json) {
               course.products = json;
+              console.log(lessons);
             });
           });
           //           fetch("https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products")
