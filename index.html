@@ -265,9 +265,9 @@
         },
 
         created: function () {
-          // if ("serviceWorker" in navigator) {
-          //   navigator.serviceWorker.register("service-worker.js");
-          // }
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js");
+          }
 
           fetch(
             "https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products"
