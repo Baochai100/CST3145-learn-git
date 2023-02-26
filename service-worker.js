@@ -1,7 +1,7 @@
 var cacheName = "afterschool-v1";
 var cacheFiles = [
   "index.html",
-  "products.js",
+  //"products.js",
   "chinese.png",
   "english.png",
   "icon-192.png",
