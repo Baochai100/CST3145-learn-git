@@ -269,10 +269,11 @@
             navigator.serviceWorker.register("service-worker.js");
           }
 
-          fetch(this.serverURL1).then(function (response) {
+          fetch(this.serverURL).then(function (response) {
             response.json().then(function (json) {
+              //alert(json);
+              //console.log(json);
               course.products = json;
-              console.log(course.products);
             });
           });
         },
