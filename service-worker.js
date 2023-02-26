@@ -1,7 +1,7 @@
 var cacheName = "afterschool-v1";
 var cacheFiles = [
   "index.html",
-  //"products.js",
+  "products.js",
   "chinese.png",
   "english.png",
   "icon-192.png",
@@ -46,17 +46,4 @@ self.addEventListener("fetch", function (e) {
       }
     })
   );
-});
-
-caches.keys().then(function (cacheNames) {
-  console.log("[Service Worker] Cached Files:");
-  cacheNames.forEach(function (cacheName) {
-    caches.open(cacheName).then(function (cache) {
-      cache.keys().then(function (cachedRequests) {
-        cachedRequests.forEach(function (cachedRequest) {
-          console.log(cachedRequest.url);
-        });
-      });
-    });
-  });
 });

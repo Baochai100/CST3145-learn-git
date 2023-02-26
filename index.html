@@ -16,22 +16,6 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="manifest" href="afterschool.webmanifest" />
     <script src="products.js"></script>
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register(
-            "/Users/bao/Desktop/mdx/CST3145-learn-git/service-worker.js"
-          )
-          .then(function (registration) {
-            console.log("Service worker registered:", registration);
-          })
-          .catch(function (error) {
-            console.log("Service worker registration failed:", error);
-          });
-      } else {
-        console.log("Service workers are not supported.");
-      }
-    </script>
   </head>
 
   <body>
@@ -282,14 +266,7 @@
 
         created: function () {
           if ("serviceWorker" in navigator) {
-            navigator.serviceWorker
-              .register("service-worker.js")
-              .then(function (registration) {
-                console.log("Service worker registered correctly");
-              })
-              .catch(function (error) {
-                console.log("Service worker failed to register:", error);
-              });
+            navigator.serviceWorker.register("service-worker.js");
           }
 
           fetch(
@@ -297,7 +274,7 @@
           ).then(function (response) {
             response.json().then(function (json) {
               course.products = json;
-              console.log(course.products);
+              console.log(lessons);
             });
           });
           //           fetch("https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products")
