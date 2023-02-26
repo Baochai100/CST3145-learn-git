@@ -18,7 +18,18 @@
     <script src="products.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("service-worker.js");
+        navigator.serviceWorker
+          .register(
+            "/Users/bao/Desktop/mdx/CST3145-learn-git/service-worker.js"
+          )
+          .then(function (registration) {
+            console.log("Service worker registered:", registration);
+          })
+          .catch(function (error) {
+            console.log("Service worker registration failed:", error);
+          });
+      } else {
+        console.log("Service workers are not supported.");
       }
     </script>
   </head>
