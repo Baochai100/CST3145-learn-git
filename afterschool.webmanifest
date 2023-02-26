@@ -4,7 +4,7 @@
   "description": "My online school store",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "favicon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
@@ -15,6 +15,6 @@
     }
   ],
   "start_url": "index.html",
-  "display": "full screen",
+  "display": "fullscreen",
   "background_color": "#260bca"
 }
