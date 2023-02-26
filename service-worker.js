@@ -9,7 +9,6 @@ var cacheFiles = [
   "math.png",
   "music.png",
   "piano.png",
-  "afterschool.webmanifest",
 ];
 
 // self.addEventListener("install", function (e) {
