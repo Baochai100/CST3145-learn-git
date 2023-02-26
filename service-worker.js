@@ -1,4 +1,4 @@
-var cacheName = "petStore-v1";
+var cacheName = "afterschool-v1";
 var cacheFiles = [
   "index.html",
   "products.js",
@@ -9,6 +9,7 @@ var cacheFiles = [
   "math.png",
   "music.png",
   "piano.png",
+  "afterschool.webmanifest",
 ];
 
 self.addEventListener("install", function (e) {
