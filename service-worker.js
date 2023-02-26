@@ -47,3 +47,16 @@ self.addEventListener("fetch", function (e) {
     })
   );
 });
+
+caches.keys().then(function (cacheNames) {
+  console.log("[Service Worker] Cached Files:");
+  cacheNames.forEach(function (cacheName) {
+    caches.open(cacheName).then(function (cache) {
+      cache.keys().then(function (cachedRequests) {
+        cachedRequests.forEach(function (cachedRequest) {
+          console.log(cachedRequest.url);
+        });
+      });
+    });
+  });
+});
