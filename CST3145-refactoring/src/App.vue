@@ -1,23 +1,6 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
-</script>
-
 <template>
   <div id="app">
     <header>
-      <!-- <h1>After School Club</h1> -->
-      <!-- <button v-on:click="showCheckout">
-        {{ totalItemInTheCart }}
-        <font-awesome-icon icon="fas fa-shopping-cart" />
-       
-        Shopping Cart
-      </button>
-      <button v-if="testConsole" @click="toggleShowTestConsole">
-        <font-awesome-icon icon="fas fa-text-height" />
-  
-        Test Console
-      </button> -->
       <div id="course">
         <h1 v-text="siteName"></h1>
         <input
@@ -86,7 +69,7 @@ import TheWelcome from "./components/TheWelcome.vue";
         </div>
 
         <div class="cart" v-if="totalItemInTheCart > 0">
-          <button v-on:click="toggleShowProduct">
+          <button v-on:click="showCheckout">
             {{ totalItemInTheCart }}
             <font-awesome-icon icon="fas fa-shopping-cart" />
             Shopping Cart
@@ -128,15 +111,27 @@ import TheWelcome from "./components/TheWelcome.vue";
       </div>
     </header>
 
-    <!-- <main>
-      <TheWelcome />
-    </main> -->
+    <main>
+      <br />
+      <component
+        :is="currentView"
+        :sortedProducts="sortedProducts"
+        :serverURL="serverURL"
+        :cart="cart"
+        @add-item-tocart="addItemToCart"
+        @add-number-to-cart="addItemToCart"
+        @take-item-away="changeSpaceValue"
+        @remove-from-cart="RemoveCartItem"
+        @delete-from-cart="deleteItemFromCart"
+      ></component>
+    </main>
   </div>
 </template>
 
 <script>
 import ProductList from "./components/ProductList.vue";
 import Checkout from "./components/Checkout.vue";
+//import products from "./assets/json/products.json";
 
 export default {
   name: "App",
@@ -144,6 +139,7 @@ export default {
     return {
       siteName: "After School Club",
       cart: [],
+      cartId: [],
       currentView: ProductList,
       testConsole: true,
       showTestConsole: false,
@@ -152,13 +148,59 @@ export default {
         method: "Subject",
         order: "Ascending",
       },
+      //serverURL: "",
+      serverURL:
+        "https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/",
+
+      //products: products,
+      products: [],
       //serverURL1: "http://localhost:3000/collections/products",
       serverURL1:
         "https://lesson-env.eba-dn8ginxr.eu-west-2.elasticbeanstalk.com/collections/products",
     };
   },
+
   components: { ProductList, Checkout },
+  created: function () {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+    let course = this;
+    fetch(this.serverURL1).then(function (response) {
+      response.json().then(function (json) {
+        //alert(json);
+        //console.log(json);
+        course.products = json;
+      });
+    });
+  },
   methods: {
+    addItemToCart: function (product) {
+      if (product.space > 0) {
+        this.cart.push(product);
+        this.cartId.push(product.id);
+      }
+    },
+
+    changeSpaceValue: function (product) {
+      if (product.space > 0) {
+        product.space -= 1;
+      }
+    },
+
+    RemoveCartItem(product) {
+      for (let i = 0; i < this.cartId.length; i++) {
+        if (this.cartId[i] == product.id) {
+          this.cartId.splice(i, 1);
+          product.space += 1;
+          return;
+        }
+      }
+    },
+    deleteItemFromCart: function (product) {
+      this.cart.pop(product);
+    },
+
     showCheckout() {
       if (this.currentView === ProductList) {
         this.currentView = Checkout;
@@ -166,6 +208,7 @@ export default {
         this.currentView = ProductList;
       }
     },
+
     toggleShowTestConsole() {
       this.showTestConsole = !this.showTestConsole;
     },
@@ -238,6 +281,73 @@ export default {
   computed: {
     totalItemInTheCart: function () {
       return this.cart.length || "";
+    },
+    sortedProducts() {
+      let compare;
+      if (this.sort.method == "Subject") {
+        if (this.sort.order == "Ascending") {
+          compare = function (a, b) {
+            if (a.subject.toLowerCase() > b.subject.toLowerCase()) return 1;
+            if (a.subject.toLowerCase() < b.subject.toLowerCase()) return -1;
+            return 0;
+          };
+        }
+        if (this.sort.order == "Descending") {
+          compare = function (a, b) {
+            if (a.subject.toLowerCase() > b.subject.toLowerCase()) return -1;
+            if (a.subject.toLowerCase() < b.subject.toLowerCase()) return 1;
+            return 0;
+          };
+        }
+      }
+      if (this.sort.method == "Location") {
+        if (this.sort.order == "Ascending") {
+          compare = function (a, b) {
+            if (a.location.toLowerCase() > b.location.toLowerCase()) return 1;
+            if (a.location.toLowerCase() < b.location.toLowerCase()) return -1;
+            return 0;
+          };
+        }
+        if (this.sort.order == "Descending") {
+          compare = function (a, b) {
+            if (a.location.toLowerCase() > b.location.toLowerCase()) return -1;
+            if (a.location.toLowerCase() < b.location.toLowerCase()) return 1;
+            return 0;
+          };
+        }
+      }
+      if (this.sort.method == "Price") {
+        if (this.sort.order == "Ascending") {
+          compare = function (a, b) {
+            if (a.price > b.price) return 1;
+            if (a.price < b.price) return -1;
+            return 0;
+          };
+        }
+        if (this.sort.order == "Descending") {
+          compare = function (a, b) {
+            if (a.price > b.price) return -1;
+            if (a.price < b.price) return 1;
+            return 0;
+          };
+        }
+      } else if (this.sort.method == "Availability") {
+        if (this.sort.order == "Ascending") {
+          compare = function (a, b) {
+            if (a.space > b.space) return 1;
+            if (a.space < b.space) return -1;
+            return 0;
+          };
+        }
+        if (this.sort.order == "Descending") {
+          compare = function (a, b) {
+            if (a.space > b.space) return -1;
+            if (a.space < b.space) return 1;
+            return 0;
+          };
+        }
+      }
+      return this.products.sort(compare);
     },
   },
 };

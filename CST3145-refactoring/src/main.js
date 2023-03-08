@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 
 import "./assets/main.css";
-//import "./assets/style.css";
+import "./assets/style.css";
 
 /* ---------- START: Font Awesome ----------*/
 /* import the fontawesome core */
