@@ -74,6 +74,11 @@
             <font-awesome-icon icon="fas fa-shopping-cart" />
             Shopping Cart
           </button>
+
+          <button v-if="testConsole" @click="toggleShowTestConsole">
+            <font-awesome-icon icon="fas fa-text-height" />
+            Test Console
+          </button>
         </div>
 
         <div class="cart" v-else>
@@ -81,10 +86,6 @@
             {{ totalItemInTheCart }}
             <font-awesome-icon icon="fas fa-shopping-cart" />
             Shopping Cart
-          </button>
-          <button v-if="testConsole" @click="toggleShowTestConsole">
-            <font-awesome-icon icon="fas fa-text-height" />
-            Test Console
           </button>
         </div>
       </div>
