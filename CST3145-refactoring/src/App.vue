@@ -74,11 +74,6 @@
             <font-awesome-icon icon="fas fa-shopping-cart" />
             Shopping Cart
           </button>
-
-          <button v-if="testConsole" @click="toggleShowTestConsole">
-            <font-awesome-icon icon="fas fa-text-height" />
-            Test Console
-          </button>
         </div>
 
         <div class="cart" v-else>
@@ -88,6 +83,12 @@
             Shopping Cart
           </button>
         </div>
+      </div>
+      <div>
+        <button v-if="testConsole" @click="toggleShowTestConsole">
+          <font-awesome-icon icon="fas fa-text-height" />
+          Test Console
+        </button>
       </div>
 
       <div v-if="testConsole && showTestConsole">
